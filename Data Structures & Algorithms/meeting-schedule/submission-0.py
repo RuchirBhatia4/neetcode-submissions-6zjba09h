@@ -1,0 +1,16 @@
+"""
+Definition of Interval:
+class Interval(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+"""
+import numpy as np
+class Solution:
+    def canAttendMeetings(self, intervals: List[Interval]) -> bool:
+        sorted_intervals = sorted(intervals, key=lambda x:x.start)
+        for i in range(1, len(sorted_intervals)):
+            if sorted_intervals[i].start < sorted_intervals[i-1].end:
+                return False
+        return True
+        

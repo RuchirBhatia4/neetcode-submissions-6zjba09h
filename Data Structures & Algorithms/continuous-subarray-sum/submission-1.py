@@ -1,0 +1,22 @@
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        if k == 0:
+            for i in range(len(nums) - 1):
+                if nums[i] == 0 and nums[i + 1] == 0:
+                    return True
+            return False
+
+        hsh = {0: -1}
+        prefix_sum = 0
+
+        for i, num in enumerate(nums):
+            prefix_sum += num
+            remainder = prefix_sum % k
+
+            if remainder in hsh:
+                if i - hsh[remainder] >= 2:
+                    return True
+            else:
+                hsh[remainder] = i
+
+        return False
